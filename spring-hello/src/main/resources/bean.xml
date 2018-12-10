@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--指向哪一个类-->
+    <bean id="springHello" class="com.spring.hello.impl.SpringHelloWord"></bean>
+    <bean id="otherHello" class="com.spring.hello.impl.OtherHelloWord"></bean>
+
+    <bean id="helloWorsService" class="com.spring.hello.common.HelloeWordService">
+        <!--参数传入，hw是set方法里的形参-->
+        <property name="hw" ref="springHello"></property>
+    </bean>
+</beans>

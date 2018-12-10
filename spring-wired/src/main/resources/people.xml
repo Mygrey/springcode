@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+   <!--方式四***通过@Autowired注解进行自动装配，注解可用于变量或者带参数构造函数上-->
+    <!--contextde 配置:
+        xmlns:context="http://www.springframework.org/schema/context"
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+    -->
+    <context:component-scan base-package="com.spring.wired"></context:component-scan>
+
+    <!--每个实例必须唯一，同时自动装配不支持int，boolean等原始类型-->
+    <bean id="student" class="com.spring.wired.Student">
+        <constructor-arg name="name" value="Mace"></constructor-arg>
+        <constructor-arg name="age" value="18"></constructor-arg>
+        <constructor-arg name="sex" value="male"></constructor-arg>
+    </bean>
+
+    <bean id="teacher" class="com.spring.wired.Teacher">
+        <constructor-arg name="name" value="Lilice"></constructor-arg>
+        <constructor-arg name="subject" value="math"></constructor-arg>
+        <constructor-arg name="grade" value="6"></constructor-arg>
+    </bean>
+
+    <!--方式一***正常装配-->
+    <bean id="getInfo_nomal" class="com.spring.wired.wiredclass.GetPeopleInfo">
+        <constructor-arg name="people" ref="teacher"></constructor-arg>
+    </bean>
+
+    <!--方式二***按照类型自动装配，注意对应类必须要有相应的set方法,-->
+    <bean id="getInfo_bytype" class="com.spring.wired.wiredclass.GetByType" autowire="byType"></bean>
+
+    <!--方式三***按照有参数构造函数进行自动装配,不能与set方法同时存在-->
+    <bean id="getInfo_construct" class="com.spring.wired.wiredclass.GetByConstruct" autowire="constructor"></bean>
+
+    <!--方式四***通过@Autowired注解进行自动装配-->
+    <bean id="getInfo_Autowired" class="com.spring.wired.wiredclass.GetByAutowired"/>
+
+    <!--方式五***byName方式-->
+    <bean id="getInfo_byname" class="com.spring.wired.wiredclass.GetByName" autowire="byName"/>
+
+    <!--方式六***AutoDetect 方式,新版本中已经移除，不阐述-->
+
+
+
+
+
+</beans>
