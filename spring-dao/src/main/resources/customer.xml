@@ -5,13 +5,17 @@
 
     <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/test" />
+        <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=GMT" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
 
     <!--上面的jdbc连接传入到具体的类-->
     <bean id="customerBean" class="com.spring.dao.common.CustomerDaoImpl">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+
+    <bean id="jdbcSupport" class="com.spring.dao.common.JdbcSupportExm">
         <property name="dataSource" ref="datasource"></property>
     </bean>
 
