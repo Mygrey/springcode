@@ -2,6 +2,7 @@ package com.spring.dao.common;
 
 import com.spring.dao.customer.Customer;
 import com.spring.dao.customer.CustomerDao;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,6 +13,12 @@ import java.sql.SQLException;
 public class CustomerDaoImpl implements CustomerDao {
    private DataSource dataSource;
 
+
+
+    /**
+     * 通过extends JdbcDaoSupport 可以不用设置DataSource
+     * @param dataSource
+     */
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -73,6 +80,16 @@ public class CustomerDaoImpl implements CustomerDao {
             }
         }
         return customer;
+    }
+
+    /**
+     * 通过JdbcTemplate方式进行插入，简化代码
+     * @param customer
+     */
+    public void insertByTemplate(Customer customer){
+        String sql="insert into customer(cust_id,name,age) values(?,?,?)";
+        JdbcTemplate temp = new JdbcTemplate(dataSource);
+        temp.update(sql,new Object[]{customer.getId(),customer.getName(),customer.getAge()});
     }
 
 }
