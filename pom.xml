@@ -12,6 +12,7 @@
         <module>spring-hello</module>
         <module>spring-dao</module>
         <module>spring-wired</module>
+        <module>javaconfigtest</module>
     </modules>
 
     <dependencies>
